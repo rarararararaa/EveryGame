@@ -7,7 +7,9 @@ const Header =()=>{
 	
 	return(
 		<div className="EG-header">
+		<a href="/">
 			<img src={logo} className="EG-logo"/>
+		</a>
 			<nav className="EG-nav">
 				
 			</nav>	
