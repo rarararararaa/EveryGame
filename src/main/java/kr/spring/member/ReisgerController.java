@@ -1,7 +1,5 @@
 package kr.spring.member;
 
-import java.security.MessageDigest;
-import java.security.SecureRandom;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +30,12 @@ public class ReisgerController {
 		log.debug("<<비밀번호>>"+map.get("passwd"));
 		memberService.insertMember(map);
 		return "회원가입 완료";
+	}
+	@RequestMapping("/test")
+	public String hashtest(@RequestBody String passwd) {
+		
+		log.debug("암호화:"+memberService.hashTest(passwd));
+		return "암호화 완료";
 	}
 	
 	
