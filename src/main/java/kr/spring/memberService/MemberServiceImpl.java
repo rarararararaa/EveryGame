@@ -39,7 +39,7 @@ public class MemberServiceImpl implements MemberService{
 		log.debug("map 내용"+map);
 		memberMapper.insertMember(map);
 	}
-	
+	  
 	private static class Hashalgorithm{
 		private static final SecureRandom random = new SecureRandom();
 		private static final byte[] SECRET_KEY = StandardCharsets.UTF_8.encode("hashTestSecretkey123!").array();//Utf8.encode("hashTestSecretkey123!");
