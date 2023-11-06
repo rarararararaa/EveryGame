@@ -5,13 +5,11 @@
 		INSERT INTO EG_MEMBER(
 			mem_num,
 			mem_email,
-			mem_passwd,
-			mem_salt
+			mem_passwd
 		) VALUES (
 			#{mem_num},
 			#{email},
-			#{passwdf},
-			#{mem_salt}
+			#{passwdf}
 		)
 	</insert>
 </mapper>

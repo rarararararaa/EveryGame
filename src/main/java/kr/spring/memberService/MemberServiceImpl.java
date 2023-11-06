@@ -35,38 +35,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void insertMember(Map<String, Object> map) throws Exception {
 		map.put("mem_num", getMemnum());
-		map.put("mem_salt",getSalt());
-		map.put("passwdf", Hasing(map.get("passwd").toString().getBytes(), map.get("mem_salt").toString()));
+		map.put("passwdf", Hashalgorithm.encode(map.get("passwd").toString()));
 		log.debug("map 내용"+map);
 		memberMapper.insertMember(map);
 	}
-	//해시 함수
 	
-		private String Hasing(byte[] pw, String salt) throws Exception{
-			MessageDigest md = MessageDigest.getInstance("SHA-256");
-			//SHA-256 해시 함수를 사용
-			for(int i=0;i<10000;i++) {
-				String temp = Byte_to_String(pw) + salt;
-				md.update(temp.getBytes());
-				pw = md.digest();
-			}
-			return Byte_to_String(pw);
-		}
-		//SALT 값 생성
-		private String getSalt() throws Exception{
-			SecureRandom rnd = new SecureRandom();
-			byte [] temp = new byte[SALT_SIZE];
-			rnd.nextBytes(temp);
-			return Byte_to_String(temp);
-		}
-		//byte값을 16진수로 변환
-		private String Byte_to_String(byte[] temp) {
-			StringBuilder sb = new StringBuilder();
-			for(byte a : temp) {
-				sb.append(String.format("%02x", a));
-			}
-			return sb.toString();
-		}
 	private static class Hashalgorithm{
 		private static final SecureRandom random = new SecureRandom();
 		private static final byte[] SECRET_KEY = StandardCharsets.UTF_8.encode("hashTestSecretkey123!").array();//Utf8.encode("hashTestSecretkey123!");
@@ -140,9 +113,24 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 	@Override
+	public boolean matchPasswd(Map<String, String> map) {
+		//db에서 패스워드 검색
+		String passwd = memberMapper.selectPasswd(map.get("email"));
+		
+		return Hashalgorithm.matches(map.get("passwd"),passwd);
+	}
+	
+	
+	@Override
 	public String hashTest(String passwd) {
 		return Hashalgorithm.encode(passwd);
 		//return HashTest.pbkdf2PasswordEncoder.encode(passwd);
 	}
+
+	@Override
+	public int selectIsEmpty(String email) {
+		return memberMapper.selectIsEmpty(email);
+	}
+
 
 }

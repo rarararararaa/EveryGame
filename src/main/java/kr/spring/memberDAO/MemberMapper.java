@@ -14,4 +14,9 @@ public interface MemberMapper {
 	
 	public void insertMember(Map<String, Object> map);
 	
+	@Select("SELECT COUNT(*) FROM eg_member WHERE mem_email =#{email}")
+	public int selectIsEmpty(String email);
+	
+	@Select("SELECT mem_passwd FROM eg_member WHERE mem_email =#{email}")
+	public String selectPasswd(String email);
 }
