@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService{
 		map.put("mem_num", getMemnum());
 		map.put("passwdf", Hashalgorithm.encode(map.get("passwd").toString()));
 		log.debug("map 내용"+map);
-		memberMapper.insertMember(map);
+		memberMapper.insertMember(map); 
 	}
 	  
 	private static class Hashalgorithm{
