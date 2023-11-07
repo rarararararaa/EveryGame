@@ -2,6 +2,8 @@ package kr.spring.memberService;
 
 import java.util.Map;
 
+import kr.spring.member.MemberVO;
+
 public interface MemberService {
 	
 	public int getMemnum();
@@ -13,4 +15,6 @@ public interface MemberService {
 	public boolean matchPasswd(Map<String, String> map);
 	
 	public String hashTest(String passwd);
+	
+	public MemberVO selectMemInfo(String email);
 }

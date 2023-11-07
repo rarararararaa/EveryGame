@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.member.MemberVO;
 import kr.spring.memberDAO.MemberMapper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -130,6 +131,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int selectIsEmpty(String email) {
 		return memberMapper.selectIsEmpty(email);
+	}
+
+	@Override
+	public MemberVO selectMemInfo(String email) {
+		return memberMapper.selectMemInfo(email);
 	}
 
 
