@@ -15,7 +15,6 @@ const Register =()=>{
 				email:email,
 				passwd:passwd
 			},
-			baseURL:'http://localhost:8080'
 		}).then(function(response){
 			alert(response.data);
 			document.location.href="/";

@@ -1,7 +1,7 @@
 import Header from './common/Header';
-
 import Sidebar from './common/Sidebar';
 
+import Eg_Content from './components/Eg_Content';
 import './App.css';
 import {BrowserRouter, Routes, Route, Link, useNavigate} from 'react-router-dom';
 import React from 'react';
@@ -16,7 +16,7 @@ function App() {
 			<Sidebar/>
 		</div>
 		<div className="content">
-			멀티룸 리스트
+			<Eg_Content/>
 		</div>
 	</div>
     </div>

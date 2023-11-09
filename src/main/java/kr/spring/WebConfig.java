@@ -11,15 +11,19 @@ import kr.spring.interceptor.LoginCheckInterceptor;
 public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("*")
-        .allowedMethods("GET", "POST");
+		registry.addMapping("/**").allowedOrigins("*").allowedOrigins("http://localhost:3000")
+        .allowedMethods("GET", "POST", "PUT", "DELETE").allowedHeaders("*").exposedHeaders("Authorization")
+        .allowCredentials(true);//쿠키, 세션 정보 허용
+		
 	}
-
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new LoginCheckInterceptor())//LoginCheckInterCeptor 등록
 				.order(1)//적용할 필더 우선 순위
-				.addPathPatterns("/api/**");///api로 시작하는 1개 이상의 모든 경로에 추가
+				.addPathPatterns("/api/**")
+				.excludePathPatterns("/api/login")
+				.excludePathPatterns("/api/session");///api로 시작하는 1개 이상의 모든 경로에 추가
 	}
 	
 	

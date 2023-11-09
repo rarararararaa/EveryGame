@@ -5,9 +5,9 @@ import {useForm} from 'react-hook-form';
 import axios from 'axios'
 
 const SideBar =()=>{
-	
 	const {register, handleSubmit, formState:{errors}} = useForm({mode: "onSubmit"})
-	
+	let member = sessionStorage.getItem("loginMember");
+	console.log(member);
 	const onSubmit =(data)=>{
 		let {email, passwd} = data;
 		axios({
@@ -17,14 +17,12 @@ const SideBar =()=>{
 				email:email,
 				passwd:passwd
 			},
-			baseURL:'http://localhost:8080'
+			withCredentials:true
 		}).then(function(response){
-			if(response.data == true){
-				
-				document.location.href="/";
-			}else{
+			if(!response.data){
 				alert('이메일 또는 비밀번호가 틀렸습니다.');
 			}
+			
 		})
 		
 	}
