@@ -7,11 +7,11 @@ const Eg_Content=()=>{
 		axios({
 			url:'api/loginCheck'
 		}).then(function(res){
-			console.log(res.headers);
+			console.log(res.headers.authorization);
 			if(res.data){
 				alert('로그인 완료');
 			} 
-			if(!res.headers['Authorization'] && res.headers['Authorization'] != null){//res.headers[헤더이름(소문자)]
+			if(res.headers.authorization == 'false' && res.headers.authorization != null){//res.headers[헤더이름(소문자)]
 				alert('로그인 후 이용할 수 있습니다.');
 			}
 			

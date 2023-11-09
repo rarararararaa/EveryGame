@@ -3,6 +3,7 @@ package kr.spring.member;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,16 +41,24 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public boolean login(@RequestBody Map<String, String> map, HttpSession session){
+	public boolean login(@RequestBody Map<String, String> map, HttpSession session
+			, HttpServletResponse response){
 		boolean result = memberService.matchPasswd(map);
 		
 		if(result) {//true일시
 			MemberVO member = memberService.selectMemInfo(map.get("email").toString());
 			//log.debug("회원 정보: "+member);
 			session.setAttribute(SessionConst.LOGIN_MEMBER, member);
+			response.addHeader("memberInfo", member.getMem_email());
 			log.debug("<<세션 저장>>:"+session.getAttribute(SessionConst.LOGIN_MEMBER));
 		}
 		return result;
+	}
+	
+	@RequestMapping("/logout")
+	public void logout(HttpSession session) {
+		session.invalidate();//세션의 모든 속성 삭제
+		log.debug("<<로그아웃>> - 세션삭제");
 	}
 	
 	@GetMapping("/loginCheck")
