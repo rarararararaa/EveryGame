@@ -5,7 +5,7 @@ const WriteBoard =()=>{
 	return(
 		<div>
 			<form>
-			
+				
 			</form>
 		</div>
 		

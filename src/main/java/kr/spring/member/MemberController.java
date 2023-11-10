@@ -53,7 +53,7 @@ public class MemberController {
 			//log.debug("회원 정보: "+member);
 			session.setAttribute(SessionConst.LOGIN_MEMBER, member);
 			response.addHeader("memberInfo", URLEncoder.encode(member.getMem_nickname(), "utf-8"));
-			log.debug("<<세션 저장>>:"+session.getAttribute(SessionConst.LOGIN_MEMBER));
+			log.debug("<<세션 저장>>:"+session.getAttribute(SessionConst.LOGIN_MEMBER));	
 		}
 		return result;
 	}
