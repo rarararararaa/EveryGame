@@ -15,4 +15,5 @@ public class MemberVO {
 	private int mem_auth;
 	private String mem_passwd;
 	private Date mem_reg_date;
+	private String mem_nickname;
 }

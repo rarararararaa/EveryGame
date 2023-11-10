@@ -7,13 +7,14 @@ const Register =()=>{
 	const {register, handleSubmit, formState:{errors}} = useForm({mode:"onBlur"});
 	
 	const onSubmit=(data)=>{
-		let {email, passwd} = data;
+		let {email, passwd,nickname} = data;
 		axios({
 			url:'/api/register',
 			method:'post',
 			data:{
 				email:email,
-				passwd:passwd
+				passwd:passwd,
+				nickname:nickname
 			},
 		}).then(function(response){
 			alert(response.data);
@@ -50,6 +51,10 @@ const Register =()=>{
 					}
 				})}/>
 				<p>{errors.passwd && errors.passwd.message}</p>
+				<input type="text" name="nickname" defaultValue='회원' maxLength="7"{...register("nickname",{
+					required:"닉네임은 필수항목입니다."
+				})}/>
+				<p>{errors.nickname && errors.nickname.message}</p>
 				<input type="submit" value="회원가입"/>
 			</form>		
 		</div>

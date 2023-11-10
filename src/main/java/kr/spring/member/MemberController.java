@@ -1,5 +1,7 @@
 package kr.spring.member;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +27,11 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@PostMapping("/check")
-	public boolean emailcheck(@RequestBody String email) {
-		int check = memberService.selectIsEmpty(email);
+	public boolean emailcheck(@RequestBody String info) {
+		CharSequence email = info.replace("\"", "");
+		int check = memberService.selectIsEmpty(email.toString());
 		log.debug("<<이메일-check>>"+check);
-		if(check > 0) {
+		if(check > 0) {//중복
 			return false; 
 		}
 		return true;
@@ -42,14 +45,14 @@ public class MemberController {
 	
 	@PostMapping("/login")
 	public boolean login(@RequestBody Map<String, String> map, HttpSession session
-			, HttpServletResponse response){
+			, HttpServletResponse response) throws UnsupportedEncodingException{
 		boolean result = memberService.matchPasswd(map);
 		
 		if(result) {//true일시
 			MemberVO member = memberService.selectMemInfo(map.get("email").toString());
 			//log.debug("회원 정보: "+member);
 			session.setAttribute(SessionConst.LOGIN_MEMBER, member);
-			response.addHeader("memberInfo", member.getMem_email());
+			response.addHeader("memberInfo", URLEncoder.encode(member.getMem_nickname(), "utf-8"));
 			log.debug("<<세션 저장>>:"+session.getAttribute(SessionConst.LOGIN_MEMBER));
 		}
 		return result;

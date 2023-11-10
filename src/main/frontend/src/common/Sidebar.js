@@ -22,9 +22,9 @@ const SideBar =()=>{
 			if(!response.data){
 				alert('이메일 또는 비밀번호가 틀렸습니다.');
 			}else{
-				console.log(response.headers.memberinfo);
-				sessionStorage.setItem('memInfo',response.headers.memberinfo);
-				setMemInfo(response.headers.memberinfo);
+				console.log(decodeURI(response.headers.memberinfo));
+				sessionStorage.setItem('memInfo',decodeURI(response.headers.memberinfo));
+				setMemInfo(decodeURI(response.headers.memberinfo));
 			}
 		})
 		
@@ -33,6 +33,7 @@ const SideBar =()=>{
 		setMemInfo(null);
 		sessionStorage.clear();
 		axios.delete('/api/logout');
+		window.location.href="/";
 	}
 	
 	return(
