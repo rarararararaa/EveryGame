@@ -4,7 +4,12 @@
   height: 1000px;
   text-align: center;
 }
-
+textarea{
+	resize: none;
+}
+.denied_red::placeholder{
+	color: red;
+}
 /********header********/
 .EG-header{
 	display: flex;

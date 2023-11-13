@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.boardDAO.BoardMapper">
+	<insert id="insertBoard" parameterType="map">
+		INSERT INTO eg_board(
+			board_num,
+			mem_num,
+			board_game_type,
+			board_country_type,
+			board_type,
+			board_content,
+			board_time,
+			board_team_num,
+			board_title
+		)VALUES(
+			#{board_num},
+			#{mem_num},
+			#{game_type},
+			#{contry_type},
+			#{type},
+			#{content},
+			#{limit_time},
+			#{team_num},
+			#{title}
+		)
+	</insert>
+</mapper>
