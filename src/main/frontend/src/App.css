@@ -10,6 +10,9 @@ textarea{
 .denied_red::placeholder{
 	color: red;
 }
+.flex{
+	display: flex;
+}
 /********header********/
 .EG-header{
 	display: flex;
@@ -45,4 +48,15 @@ textarea{
 /***content***/
 .content{
 	width: 1000px;
+}
+/***content-BoardList***/
+.Rooms{
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.Room{
+	margin-top: 10px;
+	width: 33%;
 }
