@@ -1,26 +1,15 @@
-import Header from './common/Header';
-import Sidebar from './common/Sidebar';
-
-import Eg_Content from './components/Eg_Content';
 import './App.css';
 import {BrowserRouter, Routes, Route, Link, useNavigate} from 'react-router-dom';
 import React from 'react';
+import Home from './common/Home';
 function App() {
   return (
-    <div className="App">
-	<header>
-		<Header/>
-	</header>
-	<div className="main-content">
-		<div className="sidebar">
-			<Sidebar/>
+	<BrowserRouter>
+		<div className="App">
+			<Home/>
 		</div>
-		<div className="content">
-			<Eg_Content/>
-		</div>
-	</div>
-    </div>
-  );
+	</BrowserRouter>
+ );
 }
 
 export default App;

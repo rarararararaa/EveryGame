@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Register from '../components/Register';
-import {BrowserRouter, Routes, Route, Link, useNavigate} from 'react-router-dom';
+import {Routes, Route, Link, useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import axios from 'axios'
 
@@ -38,7 +38,6 @@ const SideBar =()=>{
 	
 	return(
 		<div className="EG-sidebar">
-		<BrowserRouter>
 		{session === null ? //로그인 하지 않았을 경우
 		<div>
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -64,7 +63,6 @@ const SideBar =()=>{
 			<button onClick={onClick}>로그아웃</button>
 		</div>
 		}
-			</BrowserRouter>
 		</div>
 	);
 }

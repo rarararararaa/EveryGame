@@ -1,5 +1,6 @@
 package kr.spring.boardService;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,11 @@ public class BoardServiceImpl implements BoardService {
 			map.put("content", StringUtil.useBrNoHtml(map.get("content").toString()));
 		log.debug("<<최종 BoardInfo>>"+map);
 		boardMapper.insertBoard(map);
+	}
+
+	@Override
+	public List<Map<String, Object>> selBoardList() {
+		return boardMapper.selBoardList();
 	}
 
 }

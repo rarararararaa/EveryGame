@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import axios from 'axios'
-import WriteBoard  from './WriteBoard';
+
+import BoardList from './BoarLlist';
+
+import { Routes, Route, useNavigate} from 'react-router-dom';
 const Eg_Content=()=>{
 	
 	const memInfo = sessionStorage.getItem('memInfo');
 	
-	const [check, setCheck] = useState(0);
+	const navigate = useNavigate();
 	
 	const BoardCheck =()=>{
 		axios({
@@ -14,11 +17,12 @@ const Eg_Content=()=>{
 			console.log(res.headers.authorization);
 			if(res.data){
 				alert('글 쓰기');
-				setCheck(1);
+				navigate('/writeBoard')
 			} 
 			if(res.headers.authorization == 'false' && res.headers.authorization != null){//res.headers[헤더이름(소문자)]
 				alert('로그인 후 이용할 수 있습니다.');
-				setCheck(0);
+				sessionStorage.clear();
+				navigate('/');
 			}
 			
 		})
@@ -26,15 +30,8 @@ const Eg_Content=()=>{
 	
 	return(
 		<div>
-		{memInfo === null || check === 0 ? 
-			<div>
-				<button onClick={BoardCheck}>글쓰기</button>
-			</div>
-		 :
-			<div>
-				<WriteBoard/>
-			</div>
-		}
+			<button onClick={BoardCheck}>글쓰기</button>
+			<BoardList/>
 		</div>
 	);
 }

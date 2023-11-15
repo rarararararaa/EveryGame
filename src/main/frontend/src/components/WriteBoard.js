@@ -1,10 +1,12 @@
 import React from 'react';
 import {useForm} from 'react-hook-form';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const WriteBoard =()=>{
 	
 	const {register, handleSubmit, formState:{errors}} = useForm({mode: "onTouched"})
+	const navigate = useNavigate();
 	
 	const onSubmit=(data)=>{
 		console.log(data);
@@ -14,6 +16,7 @@ const WriteBoard =()=>{
 			data:{data}
 		}).then(function(res){
 			alert(res.data);
+			navigate('/');
 		})
 	}	
 	
@@ -43,17 +46,19 @@ const WriteBoard =()=>{
 					<option value="3">글로벌</option>
 					<option value="4">기타</option>
 				</select>
-				<input type="radio" value="1" {...register("type")} checked/>베테랑
+				<input type="radio" value="1" {...register("type")} defaultChecked/>베테랑
 				<input type="radio" value="2" {...register("type")}/>일반
 				<input type="radio" value="3" {...register("type")}/>기타
 				<span>{errors.contry_type && errors.contry_type.message}</span>
+				<label>인원</label>
 				<input type="number" placeholder={errors.team_num && errors.team_num.message}{...register("team_num",{
 					required:'필수 입력사항입니다.',
 					pattern:{
-						value:/^[2-99]{1,2}$/,
+						value:/^[1-99]{1,2}$/,
 						message:'최대 인원은 99명입니다.'
 					}
 				})}/>
+				<label>멀티시간</label>
 				<input type="number" {...register("limit_time",{
 					required:'필수 입력사항입니다.',
 					pattern:{
@@ -61,6 +66,7 @@ const WriteBoard =()=>{
 						message:"최소 1시간에서 최대 8시간입니다."
 					}
 				})}/>
+				<span>{errors.limit_time && errors.limit_time.message}</span>
 				<textarea maxLength='1000' {...register("content")}></textarea>
 				<input type="submit" value="완료"/>
 			</form>
