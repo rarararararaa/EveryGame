@@ -16,4 +16,9 @@ public interface BoardMapper {
 	
 	@Select("SELECT * FROM eg_board")
 	public List<Map<String, Object>> selBoardList();
+	
+	@Select("SELECT * FROM eg_board WHERE board_num=#{board_num}")
+	public Map<String, Object> selectBoard(int board_num);
+	
+	public void updateBoard(Map<String, Object> map);
 }

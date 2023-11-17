@@ -27,7 +27,8 @@ public class WebConfig implements WebMvcConfigurer {
 				.excludePathPatterns("/api/login")
 				.excludePathPatterns("/api/session")
 				.excludePathPatterns("/api/register")
-				.excludePathPatterns("/api/BoardList");///api로 시작하는 1개 이상의 모든 경로에 추가
+				.excludePathPatterns("/api/BoardList")
+				.excludePathPatterns("/api/BoardDetail");///api로 시작하는 1개 이상의 모든 경로에 추가
 	}
 	
 	

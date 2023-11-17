@@ -24,4 +24,15 @@
 			#{title}
 		)
 	</insert>
+	<update id="updateBoard" parameterType="map">
+		UPDATE eg_board SET
+		board_game_type = #{game_type},
+		board_country_type = #{contry_type},
+		board_type = #{type},
+		board_content = #{contry_type},
+		board_time = #{limit_time},
+		board_team_num = #{team_num},
+		board_title = #{title}
+		WHERE board_num = #{board_num}
+	</update>
 </mapper>

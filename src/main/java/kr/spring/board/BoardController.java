@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.spring.SessionConst;
@@ -38,5 +39,17 @@ public class BoardController {
 	@GetMapping("/BoardList")
 	public List<Map<String, Object>> selectBoardList(){
 		return boardService.selBoardList();
+	}
+	
+	@GetMapping("/BoardDetail")
+	public Map<String, Object> detailBoard(@RequestParam int num){
+		return boardService.selectBoard(num);
+	}
+	
+	@PostMapping("/UpdateBoard")
+	public boolean updateBoard(@RequestBody Map<String, Object> map) {
+		log.debug("<<수정>>"+map);
+		boardService.updateBoard(map);
+		return true;
 	}
 }

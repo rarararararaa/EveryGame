@@ -34,4 +34,18 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.selBoardList();
 	}
 
+	@Override
+	public Map<String, Object> selectBoard(int board_num) {
+		return boardMapper.selectBoard(board_num);
+	}
+
+	@Override
+	public void updateBoard(Map<String, Object> map) {
+		map.put("title", StringUtil.useBrNoHtml(map.get("title").toString()));
+		if(map.get("content") != null)
+			map.put("content", StringUtil.useBrNoHtml(map.get("content").toString()));
+		log.debug("<<최종 BoardInfo>>"+map);
+		boardMapper.updateBoard(map);
+	}
+
 }

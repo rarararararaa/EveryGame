@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 const BoardList =()=>{
@@ -22,7 +23,7 @@ const BoardList =()=>{
 	useEffect(()=>{
 		axios.get('/api/BoardList').then((res)=>{
 			setList(res.data);
-			//console.log(res.data);
+			console.log(res.data);
 		})		
 	},[])//deps(=[])가 없으면 컴포넌트가 랜더링 될 때마다 실행, []를 표시하면 처음 랜더링 될때만 실행
 	//[]를 쓰지 않으면 부한 루프가 되는 이유는 useState때문 state를 수정하면 컴포넌트가 다시 랜더링 된다.
@@ -33,7 +34,7 @@ const BoardList =()=>{
 					return(
 						<div className="Room">
 							<div className="Room-title">
-								{i.BOARD_TITLE}
+								<Link to="/boardDetail" state={i.BOARD_NUM}> {i.BOARD_TITLE} </Link>
 								{i.BOARD_TEAM_NOW}/{i.BOARD_TEAM_NUM}
 							</div>
 							<div className="Room-content">
