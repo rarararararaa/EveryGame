@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.boardDAO.BoardMapper;
+import kr.spring.boardVO.BoardVO;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,12 +41,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void updateBoard(Map<String, Object> map) {
-		map.put("title", StringUtil.useBrNoHtml(map.get("title").toString()));
-		if(map.get("content") != null)
-			map.put("content", StringUtil.useBrNoHtml(map.get("content").toString()));
-		log.debug("<<최종 BoardInfo>>"+map);
-		boardMapper.updateBoard(map);
+	public void updateBoard(BoardVO vo) {
+		vo.setBoard_title(StringUtil.useBrNoHtml(vo.getBoard_title()));
+		if(vo.getBoard_content() != null)
+			vo.setBoard_content(StringUtil.useBrNoHtml(vo.getBoard_content()));
+		boardMapper.updateBoard(vo);
 	}
 
 }

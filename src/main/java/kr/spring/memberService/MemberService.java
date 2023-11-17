@@ -2,7 +2,7 @@ package kr.spring.memberService;
 
 import java.util.Map;
 
-import kr.spring.member.MemberVO;
+import kr.spring.memberVO.MemberVO;
 
 public interface MemberService {
 	

@@ -5,7 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import kr.spring.member.MemberVO;
+import kr.spring.memberVO.MemberVO;
 
 
 @Mapper

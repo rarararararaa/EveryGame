@@ -1,4 +1,4 @@
-package kr.spring.board;
+package kr.spring.boardVO;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ public class BoardVO {
 	private int board_num;
 	private int mem_num;
 	private int board_game_type;//게임 종류
-	private int board_contry_type;
+	private int board_country_type;
 	private int board_type;
 	private String board_content;
 	private Date board_reg_date;

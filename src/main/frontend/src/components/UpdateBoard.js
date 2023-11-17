@@ -18,6 +18,8 @@ const UpdateBoard =()=>{
 		}).then(function(res){
 			if(res.data)
 				alert('수정되었습니다.');
+			else if(!res.data)
+				alert('수정 권한이 없습니다.')
 			navigate('/boardDetail',{state:board.BOARD_NUM});
 		})
 	}	
@@ -26,11 +28,12 @@ const UpdateBoard =()=>{
 		<div>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<input type="text" placeholder="제목을 입력하세요" defaultValue={board.BOARD_TITLE} maxLength='300' className={errors.title && errors.title.message} 
-				{...register("title",{
+				{...register("board_title",{
 					required: 'denied_red'
 				})}/>
 				<input type="hidden" value={board.BOARD_NUM} {...register("board_num")}/>
-				<select defaultValue={board.BOARD_GAME_TYPE} {...register("game_type",{
+				<input type="hidden" value={board.MEM_NUM} {...register("mem_num")}/>
+				<select defaultValue={board.BOARD_GAME_TYPE} {...register("board_game_type",{
 					required:"필수 선택사항입니다."
 				})}>
 					<option value="">게임 종류를 선택하세요.</option>
@@ -40,7 +43,7 @@ const UpdateBoard =()=>{
 					<option value="4">기타</option>
 				</select>
 				<span>{errors.game_type && errors.game_type.message}</span>
-				<select defaultValue={board.BOARD_COUNTRY_TYPE} {...register("contry_type",{
+				<select defaultValue={board.BOARD_COUNTRY_TYPE} {...register("board_contry_type",{
 					required:"필수 선택사항입니다."
 				})}>
 					<option value="">서버 국가를 선택하세요.</option>
@@ -49,13 +52,13 @@ const UpdateBoard =()=>{
 					<option value="3">글로벌</option>
 					<option value="4">기타</option>
 				</select>
-				<input type="radio" value="1" {...register("type")} defaultChecked={board.BOARD_COUNTRY_TYPE === 1 ? true : false}/>베테랑
-				<input type="radio" value="2" {...register("type")} defaultChecked={board.BOARD_COUNTRY_TYPE === 2 ? true : false}/>일반
-				<input type="radio" value="3" {...register("type")} defaultChecked={board.BOARD_COUNTRY_TYPE === 3 ? true : false}/>기타
+				<input type="radio" value="1" {...register("board_type")} defaultChecked={board.BOARD_COUNTRY_TYPE === 1 ? true : false}/>베테랑
+				<input type="radio" value="2" {...register("board_type")} defaultChecked={board.BOARD_COUNTRY_TYPE === 2 ? true : false}/>일반
+				<input type="radio" value="3" {...register("board_type")} defaultChecked={board.BOARD_COUNTRY_TYPE === 3 ? true : false}/>기타
 				<span>{errors.contry_type && errors.contry_type.message}</span>
 				<label>인원</label>
 				<input type="number" placeholder={errors.team_num && errors.team_num.message}
-				defaultValue={board.BOARD_TEAM_NUM} {...register("team_num",{
+				defaultValue={board.BOARD_TEAM_NUM} {...register("board_team_num",{
 					required:'필수 입력사항입니다.',
 					pattern:{
 						value:/^[1-99]{1,2}$/,
@@ -63,7 +66,7 @@ const UpdateBoard =()=>{
 					}
 				})}/>
 				<label>멀티시간</label>
-				<input type="number" defaultValue={board.BOARD_TIME} {...register("limit_time",{
+				<input type="number" defaultValue={board.BOARD_TIME} {...register("board_time",{
 					required:'필수 입력사항입니다.',
 					pattern:{
 						value:/^[1-8]{1}$/,
@@ -71,7 +74,7 @@ const UpdateBoard =()=>{
 					}
 				})}/>
 				<span>{errors.limit_time && errors.limit_time.message}</span>
-				<textarea maxLength='1000' defaultValue={board.BOARD_CONTENT} {...register("content")}></textarea>
+				<textarea maxLength='1000' defaultValue={board.BOARD_CONTENT} {...register("board_content")}></textarea>
 				<input type="submit" value="완료"/>
 			</form>
 		</div>

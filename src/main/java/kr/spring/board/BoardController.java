@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.spring.SessionConst;
 import kr.spring.boardService.BoardService;
-import kr.spring.member.MemberVO;
+import kr.spring.boardVO.BoardVO;
+import kr.spring.memberVO.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -47,9 +48,12 @@ public class BoardController {
 	}
 	
 	@PostMapping("/UpdateBoard")
-	public boolean updateBoard(@RequestBody Map<String, Object> map) {
-		log.debug("<<수정>>"+map);
-		boardService.updateBoard(map);
+	public boolean updateBoard(@RequestBody BoardVO vo, HttpSession session) {
+		MemberVO mem = (MemberVO) session.getAttribute(SessionConst.LOGIN_MEMBER);
+		log.debug("<<수정>>"+vo); 
+		if(mem.getMem_num() != vo.getMem_num()	)
+			return false;
+		boardService.updateBoard(vo);
 		return true;
 	}
 }

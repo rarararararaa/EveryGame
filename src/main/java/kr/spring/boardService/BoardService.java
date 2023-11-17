@@ -3,6 +3,8 @@ package kr.spring.boardService;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.boardVO.BoardVO;
+
 public interface BoardService {
 	
 	//게시글 작성
@@ -13,5 +15,5 @@ public interface BoardService {
 	public Map<String, Object> selectBoard(int board_num);
 	
 	//게시글 수정
-	public void updateBoard(Map<String, Object> map);
+	public void updateBoard(BoardVO vo);
 }

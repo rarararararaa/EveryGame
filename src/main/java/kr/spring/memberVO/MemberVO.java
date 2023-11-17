@@ -1,4 +1,4 @@
-package kr.spring.member;
+package kr.spring.memberVO;
 
 import java.util.Date;
 

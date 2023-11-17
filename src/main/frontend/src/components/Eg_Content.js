@@ -16,7 +16,6 @@ const Eg_Content=()=>{
 		}).then(function(res){
 			console.log(res.headers.authorization);
 			if(res.data){
-				alert('글 쓰기');
 				navigate('/writeBoard')
 			} 
 			if(res.headers.authorization == 'false' && res.headers.authorization != null){//res.headers[헤더이름(소문자)]
