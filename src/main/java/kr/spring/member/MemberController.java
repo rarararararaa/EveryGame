@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.spring.SessionConst;
+import kr.spring.boardService.BoardService;
+import kr.spring.boardVO.BoardVO;
 import kr.spring.memberService.MemberService;
 import kr.spring.memberVO.MemberVO;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private BoardService boardService;
 	
 	@PostMapping("/check")
 	public boolean emailcheck(@RequestBody String info) {
@@ -67,7 +72,17 @@ public class MemberController {
 	}
 	
 	@GetMapping("/loginCheck")
-	public boolean loginChechk() {
+	public boolean loginChechk(@RequestParam( required = false,defaultValue = "0") int board_num
+			, HttpSession session) {
+		if(board_num != 0) {
+			MemberVO mem = (MemberVO) session.getAttribute(SessionConst.LOGIN_MEMBER);
+			BoardVO board = boardService.selectBoard(board_num);
+			log.debug("로그인:"+mem.getMem_num()+", 게시글:"+board.getMem_num());
+			if(mem.getMem_num() != board.getMem_num())
+				return false;
+			else
+				log.debug("회원 일치");
+		}
 		return true;
 	}
 	

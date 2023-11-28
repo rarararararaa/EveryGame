@@ -43,7 +43,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("/BoardDetail")
-	public Map<String, Object> detailBoard(@RequestParam int num){
+	public BoardVO detailBoard(@RequestParam int num){
 		return boardService.selectBoard(num);
 	}
 	

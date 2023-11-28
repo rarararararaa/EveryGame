@@ -14,24 +14,27 @@ const BoardDetail=()=>{
 			num:num
 		}}).then((res)=>{
 			setBoard(res.data);
-			console.log(res.data);
+			//console.log(res.data);
 			//console.log(board.BOARD_NUM);
 		}).catch(()=>{
 			alert('네드워크 오류');
 		})
 	},[])
 	
-	const BoardCheck =()=>{
+	const BoardCheck =(num)=>{
 		axios({
-			url:'api/loginCheck'
+			url:'api/loginCheck',
+			post:'get',
+			params:{board_num:num}
 		}).then(function(res){
-			console.log(res.headers.authorization);
 			if(res.headers.authorization == 'false' && res.headers.authorization != null){//res.headers[헤더이름(소문자)]
-				alert('로그인 후 이용할 수 있습니다.');
+				alert('로그인 후 이용가능합니다.');
 				sessionStorage.clear();
 				navigate('/');
+			}else if(!res.data){
+				alert('수정 권한이 없습니다.')
+				navigate('/');				
 			}
-			
 		})
 	}
 	
@@ -39,14 +42,14 @@ const BoardDetail=()=>{
 		<div>
 			<div className="board-Title">
 			<ul>
-				<li>{board.BOARD_TITLE}</li>
-				<li>{board.BOARD_REG_DATE}</li>
+				<li>{board.board_title}</li>
+				<li>{board.board_reg_date}</li>
 			</ul>
 			</div>
 			<div>
-				{board.BOARD_CONTENT}
+				{board.board_content}
 			</div>
-			<Link to="/updateBoard" state={board}><button onClick={BoardCheck}>수정</button></Link>
+			<Link to="/updateBoard" state={board}><button onClick={()=>BoardCheck(board.board_num)}>수정</button></Link>
 		</div>
 		
 	);

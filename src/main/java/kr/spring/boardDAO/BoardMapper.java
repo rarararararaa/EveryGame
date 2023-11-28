@@ -20,7 +20,7 @@ public interface BoardMapper {
 	public List<Map<String, Object>> selBoardList();
 	
 	@Select("SELECT * FROM eg_board WHERE board_num=#{board_num}")
-	public Map<String, Object> selectBoard(int board_num);
+	public BoardVO selectBoard(int board_num);
 	
 	public void updateBoard(BoardVO vo);
 }

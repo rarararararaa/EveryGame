@@ -36,7 +36,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Map<String, Object> selectBoard(int board_num) {
+	public BoardVO selectBoard(int board_num) {
 		return boardMapper.selectBoard(board_num);
 	}
 
