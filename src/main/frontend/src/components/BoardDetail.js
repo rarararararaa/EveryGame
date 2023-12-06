@@ -44,12 +44,14 @@ const BoardDetail=()=>{
 			<ul>
 				<li>{board.board_title}</li>
 				<li>{board.board_reg_date}</li>
+				<li>
+					<Link to="/updateBoard" state={board}><button onClick={()=>BoardCheck(board.board_num)}>수정</button></Link>
+				</li>
 			</ul>
 			</div>
 			<div>
 				{board.board_content}
 			</div>
-			<Link to="/updateBoard" state={board}><button onClick={()=>BoardCheck(board.board_num)}>수정</button></Link>
 		</div>
 		
 	);

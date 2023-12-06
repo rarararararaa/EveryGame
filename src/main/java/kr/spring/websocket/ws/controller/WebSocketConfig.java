@@ -1,4 +1,4 @@
-package kr.spring.websocket.ws;
+package kr.spring.websocket.ws.controller;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
